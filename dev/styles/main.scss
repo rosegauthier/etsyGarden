@@ -1,7 +1,64 @@
 @import '_setup.scss';
 
 body {
-	transform: rotate(30deg);
-	background: blue;
-	color: green;
+
+}
+
+.wrapper{
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+header{
+	width: 100%;
+	height: 100vh;
+	background-image: url('https://hd.unsplash.com/photo-1444594975920-e69885b357d5');
+	background-size: cover;
+	position: relative;
+}
+
+.headerContent{
+	position: absolute;
+	top: 50%;
+	left: 30%;
+	color: white;
+	font-family: sans-serif;
+}
+
+.headerContent svg{
+	width: 70px;
+}
+
+
+
+main{
+	position: relative;
+}
+
+main h2{
+	text-align: center;
+}
+
+main form{
+	max-width: 600px;
+	// background-color: grey;
+	margin: 0 auto;
+	text-align: center;
+}
+
+main button{
+	display: inline-block;
+	width: 300px;
+	margin: 0 auto;
+	text-align: center;
+	margin-left: calc(50% - 150px);
+	margin-top: 20px;
+}
+
+section.results{
+	width: 100%;
+}
+
+section.results input{
+	width: 100%;
 }
