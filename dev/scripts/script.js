@@ -45,7 +45,7 @@ mainKnits.getKnits = function() {
 
 		results.forEach(function(item, index){
 			var removePatterns = item.tags.filter(function(){
-				return item != /([pattern])\w+/g
+				return item !== /([pattern])\w+/g
 			});
 		});
 
