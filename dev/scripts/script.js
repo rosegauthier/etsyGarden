@@ -17,6 +17,8 @@ mainKnits.favorersSort = function(a,b) {
 	}
 };
 
+
+
 mainKnits.getKnits = function() {
 	$.ajax({
 		url: 'http://proxy.hackeryou.com',
@@ -36,7 +38,7 @@ mainKnits.getKnits = function() {
 		}
 	}).then(function(etsy) {
 		console.log(etsy);
-	
+
 		var results = etsy.results;
 
 		// var removePatterns = results.tags.filter(function(){
@@ -51,16 +53,35 @@ mainKnits.getKnits = function() {
 
 		//We need to be able to sort the results before we print them on the page
 		results.sort(mainKnits.favorersSort);
-		console.log(results);
+
+		//Provide empty array for below operations
+		var filteredResults = [];
+		//loop through each item in the results array
+		results.forEach(function(result,index) {
+			//assume each item is not a pattern
+			var isPattern = false;
+			//For each result, loop through each string in the tags array
+			result.tags.forEach(function(tag,index) {
+				//use regex to match any "pattern" in the string
+				var pattern = /(pattern)+/g;
+				if (pattern.exec(tag)) {
+					//if the word "pattern" appears in the string, mark this result as a pattern
+					isPattern = true;
+				}
+			});
+			//for each result, check if it is a pattern. If it is not a pattern, push it onto the empty array we created
+			if (isPattern === false) {
+				filteredResults.push(result);
+			}
+		});
 
 		//Based on the 100 results we get back
 		//We want to sort by relevance so that the top images in the results section will be most favourited
 		//The results at the bottom will have the least amount of favourers
-		results.forEach(function(item, index) {
+		filteredResults.forEach(function(item, index) {
 			var previewImage = item.Images[0].url_170x135;
-			$('body').append(`<img src=${previewImage}><p>${item.num_favorers}</p>`);
+			$('body').append(`<img src=${previewImage}>`);
 		});
-
 	});
 };
 
