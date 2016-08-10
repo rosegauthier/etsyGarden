@@ -23,16 +23,40 @@ mainKnits.getKnits = function() {
 		}
 	}).then(function(etsy) {
 		console.log(etsy);
-		finalKnits = etsy.results[0].images[0].url_75x75
+		// finalKnits = etsy.results[0].images[0].url_75x75
 		var results = etsy.results;
-		console.log(results.user_id);
 		results.forEach(function(item, index) {
 			var previewImage = item.Images[0].url_170x135;
-			$('body').append(`<img src=${previewImage}>`);
-		});
 
+			var price = item.price;
+
+			var currency = item.currency_code;
+
+			var productUrl = item.url;
+
+			console.log(price);
+
+			$('.grid').append(`
+				<a href="${productUrl}" class="grid-item grid-item--width2 productItem">
+
+					<div class="pricetag"><p>${price} ${currency}</p></div>
+
+					<img src=${previewImage}>
+
+				</a>`);
+		});
+		$('.grid').isotope({
+		  // options
+		  itemSelector: '.grid-item',
+ // resizable: false,
+ masonry: {
+  // columnWidth: colW,
+    isFitWidth: true
+}
+
+		});
 		results.forEach(function(item, index) {
-			console.log(item.user_id);
+			// console.log(item.user_id);
 		});
 		// console.log(finalKnits);
 	});
@@ -40,6 +64,10 @@ mainKnits.getKnits = function() {
 
 mainKnits.init = function() {
 	mainKnits.getKnits();
+
+
+
+
 };
 
 $(function() {
