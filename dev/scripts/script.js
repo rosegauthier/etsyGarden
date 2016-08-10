@@ -22,7 +22,7 @@ mainKnits.getKnits = function() {
 			}
 		}
 	}).then(function(etsy) {
-		// console.log(etsy);
+		console.log(etsy);
 		// finalKnits = etsy.results[0].images[0].url_75x75
 		var results = etsy.results;
 		// console.log(results.user_id);
