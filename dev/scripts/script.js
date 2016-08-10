@@ -23,15 +23,15 @@ mainKnits.getKnits = function() {
 		}
 	}).then(function(etsy) {
 		console.log(etsy);
+		// finalKnits = etsy.results[0].images[0].url_75x75
 		var results = etsy.results;
-		// console.log(results.user_id);
 		results.forEach(function(item, index) {
 			var previewImage = item.Images[0].url_170x135;
 			$('body').append(`<img src=${previewImage}>`);
 		});
 
 		results.forEach(function(item, index) {
-			// console.log(item.user_id);
+			console.log(item.num_favorers);
 		});
 		// console.log(finalKnits);
 	});
