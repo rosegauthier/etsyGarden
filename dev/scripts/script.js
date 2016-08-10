@@ -1,4 +1,4 @@
-var mainKnits = {}
+var mainKnits = {};
 
 mainKnits.apiKey = 'c7jmtzsyy9arcehfyeq3mk58';
 mainKnits.apiurl = 'https://openapi.etsy.com/v2/listings/active'
