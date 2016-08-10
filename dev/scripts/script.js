@@ -1,7 +1,21 @@
-var mainKnits = {};
+// OUR MAINKNITS OBJECT
+var mainKnits = {}
 
 mainKnits.apiKey = 'c7jmtzsyy9arcehfyeq3mk58';
 mainKnits.apiurl = 'https://openapi.etsy.com/v2/listings/active'
+
+
+mainKnits.favorersSort = function(a,b) {
+	if (a.num_favorers < b.num_favorers) {
+		return 1;
+	}
+	else if (a.num_favorers > b.num_favorers) {
+		return -1;
+	}
+	else {
+		return 0;
+	}
+};
 
 mainKnits.getKnits = function() {
 	$.ajax({
@@ -18,22 +32,24 @@ mainKnits.getKnits = function() {
 				limit: 100,
 				listing_id: 'images',
 				includes: 'Images'
-				// creation_tsz: 60
 			}
 		}
 	}).then(function(etsy) {
 		console.log(etsy);
-		// finalKnits = etsy.results[0].images[0].url_75x75
+
 		var results = etsy.results;
+
+		//We need to be able to sort the results before we print them on the page
+		results.sort(mainKnits.favorersSort);
+		console.log(results);
+
+		//Based on the 100 results we get back
+		//We want to sort by relevance so that the top images in the results section will be most favourited
+		//The results at the bottom will have the least amount of favourers
 		results.forEach(function(item, index) {
 			var previewImage = item.Images[0].url_170x135;
-			$('body').append(`<img src=${previewImage}>`);
+			$('body').append(`<img src=${previewImage}><p>${item.num_favorers}</p>`);
 		});
-
-		results.forEach(function(item, index) {
-			console.log(item.num_favorers);
-		});
-		// console.log(finalKnits);
 	});
 };
 
