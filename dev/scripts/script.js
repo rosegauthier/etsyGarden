@@ -39,6 +39,16 @@ mainKnits.getKnits = function() {
 	
 		var results = etsy.results;
 
+		// var removePatterns = results.tags.filter(function(){
+		// 	/([pattern])\w+/g
+		// });
+
+		results.forEach(function(item, index){
+			var removePatterns = item.tags.filter(function(){
+				return item != /([pattern])\w+/g
+			});
+		});
+
 		//We need to be able to sort the results before we print them on the page
 		results.sort(mainKnits.favorersSort);
 		console.log(results);
