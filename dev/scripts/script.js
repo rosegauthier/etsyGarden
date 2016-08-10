@@ -17,9 +17,35 @@ mainKnits.favorersSort = function(a,b) {
 	}
 };
 
+mainKnits.geoLocate = function() {
+	if('geolocation' in navigator){
+	   // geolocation is supported :)
+	   navigator.geolocation.getCurrentPosition(success, options); 
+	}else{
+	   // no geolocation :(
+	}
+	var options = {
+	// enableHighAccuracy = should the device take extra time or power to return a really accurate result, or should it give you the quick (but less accurate) answer?  
+	   enableHighAccuracy: false, 
+	// timeout = how long does the device have, in milliseconds to return a result?
+	   timeout: 5000,  
+	// maximumAge = maximum age for a possible previously-cached position. 0 = must return the current position, not a prior cached position
+	   maximumAge: 0 
+	};
+	function success(pos){
+	// get longitude and latitude from the position object passed in
+	   var lng = pos.coords.longitude;
+	   var lat = pos.coords.latitude;
+	// and presto, we have the device's location! Let's just alert it for now... 
+	   console.log(lat,lng);
+	};
+	function error(err){
+	   alert('Can not find your location. Please manually enter your city.'); // alert the error message
+	};
+}
 
 
-mainKnits.getKnits = function() {
+mainKnits.getKnits = function(location) {
 	$.ajax({
 		url: 'http://proxy.hackeryou.com',
 		method: 'GET',
@@ -30,14 +56,14 @@ mainKnits.getKnits = function() {
 				api_key: mainKnits.apiKey,
 				materials: 'knit',
 				category: 'knit',
-				location: 'Toronto',
+				location: location,
 				limit: 100,
 				listing_id: 'images',
 				includes: 'Images'
 			}
 		}
 	}).then(function(etsy) {
-		console.log(etsy);
+		
 
 		var results = etsy.results;
 
@@ -64,6 +90,7 @@ mainKnits.getKnits = function() {
 				filteredResults.push(result);
 			}
 		});
+		console.log(etsy);
 
 		//Based on the 100 results we get back
 		//We want to sort by relevance so that the top images in the results section will be most favourited
@@ -76,7 +103,16 @@ mainKnits.getKnits = function() {
 };
 
 mainKnits.init = function() {
-	mainKnits.getKnits();
+	$('.user-location-form').on('submit', function(e) {
+		e.preventDefault();
+		var userLocation = $('.user-location').val();
+		
+		mainKnits.getKnits(userLocation);
+	});
+	$('button').on('click', function() {
+
+	mainKnits.geoLocate();
+	});
 };
 
 $(function() {
