@@ -63,8 +63,7 @@ mainKnits.getKnits = function(location) {
 			}
 		}
 	}).then(function(etsy) {
-		
-
+	
 		var results = etsy.results;
 
 		// var removePatterns = results.tags.filter(function(){
@@ -107,7 +106,31 @@ mainKnits.getKnits = function(location) {
 		//The results at the bottom will have the least amount of favourers
 		filteredResults.forEach(function(item, index) {
 			var previewImage = item.Images[0].url_170x135;
-			$('body').append(`<img src=${previewImage}>`);
+			// $('body').append(`<img src=${previewImage}>`);
+			// console.log(item)
+
+			var productUrl = item.url;
+			var price = item.price;
+			var currency = item.currency_code;
+
+			$('.grid').append(`
+				<a href="${productUrl}" class="grid-item grid-item--width2 productItem">
+
+					<div class="pricetag"><p>${price} ${currency}</p></div>
+
+					<img src=${previewImage}>
+
+				</a>`);
+		});
+		$('.grid').isotope({
+	 		 // options
+			itemSelector: '.grid-item',
+		 	// resizable: false,
+		 	masonry: {
+		  	// columnWidth: colW,
+		    	isFitWidth: true
+			}
+
 		});
 	});
 };
