@@ -1,8 +1,9 @@
 @import '_setup';
 @import '_custom-range';
+@import '_var';
 
 body{
-	font-family: 'Lato', sans-serif;
+	font-family: $primary-font;
 	background-color: #cac3c0;
 }
 
@@ -29,7 +30,7 @@ h1{
 	top: 50%;
 	left: calc(50% - 280px);
 	color: #ab453c;
-	font-family: 'Playfair Display', serif;
+	font-family: $heading-font;
 	font-style: italic;
 	font-weight: bold;
 }
@@ -49,30 +50,61 @@ main h2{
 	text-align: center;
 }
 
-main form{
-	max-width: 600px;
-	// background-color: grey;
-	margin: 0 auto;
-	text-align: center;
+.user-location-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+		form.user-location-form {
+			font-size: 0;
+			input[type="text"] {
+				border: none;
+				height: 40px;
+				padding: 10px;
+				font-size: 18px;
+			}
+			input[type="submit"] {
+				background-color: #ab453c;
+				border: none;
+				color: white;
+				height: 40px;
+				padding: 10px;
+				font-size: 18px;
+				margin: 0 10px 0 0;
+				// width: 10%;
+			}
+		}
+		.geolocation {
+			text-align: center;
+			// padding: 20px 0;
+				button{
+					display: inline-block;
+					width: 300px;
+					margin: 0 auto;
+					border: none;
+					background-color: #ab453c;
+					height: 40px;
+					margin: 0 0 0 10px;
+						h3 {
+							color: white;
+							margin: 0;
+						}
+				}
+		}
 }
 
-.geolocation {
-	text-align: center;
-	padding: 20px 0;
-}
-
-main button{
-	display: inline-block;
-	width: 300px;
-	margin: 0 auto;
-}
 
 .loading-container {
 	height: 100px;
 	text-align: center;
 	.loading{
 		display: none;
-	}	
+	}
+	img {
+		width: 80px;
+		height: 80px;
+		position: relative;
+		top: 12px;
+	}
 }
 
 section.results{
