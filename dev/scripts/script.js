@@ -127,13 +127,21 @@ mainKnits.getKnits = function(location) {
 			var productUrl = item.url;
 			var price = item.price;
 			var currency = item.currency_code;
+			var title = item.title;
 
 			$('.grid').append(
 				`<a href="${productUrl}" class="grid-item productItem">
 
-					<div class="pricetag"><p>${price} ${currency}</p></div>
+					<div class="pricetag">
+						<img src="assets/pricetag.svg" alt="price tag">
+						<div class="pricebox">
+							<p class="dollars" >$${price}</p>
+							<p class="currency">${currency}</p>
+						</div>
+						
+					</div>
 
-					<img src=${previewImage}>
+					<img src=${previewImage} alt="${title}">
 
 				</a>`);
 		});
