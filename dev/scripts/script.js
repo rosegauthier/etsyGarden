@@ -57,7 +57,10 @@ mainKnits.convertLocation = function(lat, lon) {
 			format: 'json'
 		}
 	}).then(function(city) {
-		console.log(city);
+		// console.log(city.address.city);
+		// console.log(city.address.state);
+		var cityState = city.address.city + "," + city.address.state;
+		mainKnits.getKnits(cityState);
 	});
 };
 
@@ -83,6 +86,17 @@ mainKnits.getKnits = function(location) {
 	
 		var results = etsy.results;
 
+		// var removePatterns = results.tags.filter(function(){
+		// 	/([pattern])\w+/g
+		// });
+
+		results.forEach(function(item, index){
+			var removePatterns = item.tags.filter(function(){
+				return item !== /([pattern])\w+/g
+			});
+		});
+
+		//We need to be able to sort the results before we print them on the page
 		//We need to be able to sort the results by relevance before we print them on the page
 		results.sort(mainKnits.favorersSort);
 
@@ -149,6 +163,7 @@ mainKnits.init = function() {
 	});
 };
 
+//document ready
 $(function() {
 	mainKnits.init();
 });
