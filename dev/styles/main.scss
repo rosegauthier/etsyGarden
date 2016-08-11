@@ -1,16 +1,9 @@
 @import '_setup.scss';
 
-body {
-
-}
-
 .wrapper{
 	max-width: 1100px;
 	margin: 0 auto;
-	// position: relative;
 }
-
-
 
 header{
 	width: 100%;
@@ -31,8 +24,6 @@ header{
 .headerContent svg{
 	width: 70px;
 }
-
-
 
 main{
 	position: relative;
@@ -76,7 +67,9 @@ section.results input{
 }
 
 .productItem{
+	display: block;
 	width: 255px;
+	height: 201px;
 	margin: 10px;
 	font-size: 0;
 	position: relative;
@@ -99,7 +92,6 @@ section.results input{
 .productItem img{
 	width: 100%;
 	font-size: 0;
-
 }
 
 .grid{

@@ -2,7 +2,8 @@
 var mainKnits = {}
 
 mainKnits.apiKey = 'c7jmtzsyy9arcehfyeq3mk58';
-mainKnits.apiurl = 'https://openapi.etsy.com/v2/listings/active'
+mainKnits.apiurl = 'https://openapi.etsy.com/v2/listings/active';
+mainKnits.geocodeurl = 'http://nominatim.openstreetmap.org/reverse';
 
 
 mainKnits.favorersSort = function(a,b) {
@@ -34,15 +35,31 @@ mainKnits.geoLocate = function() {
 	};
 	function success(pos){
 	// get longitude and latitude from the position object passed in
-	   var lng = pos.coords.longitude;
 	   var lat = pos.coords.latitude;
+	   var lon = pos.coords.longitude;
 	// and presto, we have the device's location! Let's just alert it for now... 
-	   console.log(lat,lng);
+	   console.log(lat,lon);
+	   mainKnits.convertLocation(lat, lon);
 	};
 	function error(err){
 	   alert('Can not find your location. Please manually enter your city.'); // alert the error message
 	};
 }
+
+mainKnits.convertLocation = function(lat, lon) {
+	$.ajax({
+		url: mainKnits.geocodeurl,
+		method: 'GET',
+		dataType: 'json',
+		data: {
+			lat: lat,
+			lon: lon,
+			format: 'json'
+		}
+	}).then(function(city) {
+		console.log(city);
+	});
+};
 
 
 mainKnits.getKnits = function(location) {
@@ -77,6 +94,7 @@ mainKnits.getKnits = function(location) {
 		});
 
 		//We need to be able to sort the results before we print them on the page
+		//We need to be able to sort the results by relevance before we print them on the page
 		results.sort(mainKnits.favorersSort);
 
 		//Provide empty array for below operations
@@ -101,20 +119,15 @@ mainKnits.getKnits = function(location) {
 		});
 		console.log(etsy);
 
-		//Based on the 100 results we get back
-		//We want to sort by relevance so that the top images in the results section will be most favourited
-		//The results at the bottom will have the least amount of favourers
+		
 		filteredResults.forEach(function(item, index) {
 			var previewImage = item.Images[0].url_170x135;
-			// $('body').append(`<img src=${previewImage}>`);
-			// console.log(item)
-
 			var productUrl = item.url;
 			var price = item.price;
 			var currency = item.currency_code;
 
-			$('.grid').append(`
-				<a href="${productUrl}" class="grid-item grid-item--width2 productItem">
+			$('.grid').append(
+				`<a href="${productUrl}" class="grid-item productItem">
 
 					<div class="pricetag"><p>${price} ${currency}</p></div>
 
@@ -143,8 +156,7 @@ mainKnits.init = function() {
 		mainKnits.getKnits(userLocation);
 	});
 	$('button').on('click', function() {
-
-	mainKnits.geoLocate();
+		mainKnits.geoLocate();
 	});
 };
 
