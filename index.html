@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Fine Knits</title>
+	<link rel="stylesheet" href="dev/styles/animate.css">
 	<link rel="stylesheet" href="public/styles/style.css">
 
 <!-- 	NOUN PROJECT CREDITS -->
@@ -31,15 +32,17 @@
 	<main>
 		<h2>Enter Your Location</h2>
 		<!--enter your location-->
-		<form action="" class="user-location-form">
-			<input type="text" name="user-location" class="user-location">
-			<input type="submit">
-		</form>
-		<div class="geolocation">
-			<button><h3>Or use your location</h3></button>
+		<div class="user-location-container">
+			<form action="" class="user-location-form">
+				<input type="text" name="user-location" class="user-location">
+				<input type="submit">
+			</form>
+			<div class="geolocation">
+				<button><h3>Use your location</h3></button>
+			</div>
 		</div>
 		<div class="loading-container">
-			<img src="assets/ripple.svg" class="loading" alt="a ripple animation denoting that the page is loading">
+			<img src="assets/red_knitting.svg" class="loading animated bounce infinite" alt="a ripple animation denoting that the page is loading">
 		</div>
 		<button data-filter="numberGreaterThan50" class="isotope-btn">number > 50</button>
 
@@ -65,8 +68,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
 
 	<script src="https://npmcdn.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
-
-<!-- 	<script src="dev/scripts/isotope.pkgd.min.js"></script> -->
 
 	<script src="dev/scripts/script.js"></script>
 
