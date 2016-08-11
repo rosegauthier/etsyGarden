@@ -135,7 +135,7 @@ mainKnits.getKnits = function(location) {
 					<div class="pricetag">
 						<img src="assets/pricetag.svg" alt="price tag">
 						<div class="pricebox">
-							<p class="dollars" >$${price}</p>
+							<p class="dollars number" >${price}</p>
 							<p class="currency">${currency}</p>
 						</div>
 						
@@ -154,6 +154,23 @@ mainKnits.getKnits = function(location) {
 		    	isFitWidth: true
 			}
 		});
+		var userPrice = mainKnits.outputUpdate();
+		console.log(userPrice);
+		// hash of functions that match data-filter values
+		var filterFns = {
+		  // show if number is greater than 50
+		  maxPrice: function() {
+		    var number = $(this).find('.number').text();
+		    return parseInt( number, 10 ) < userPrice;
+		  },
+		};
+		// filter items on button click
+		$('.price-sort').on( 'input change', function() {
+		  var filterValue = $(this).attr('data-filter');
+		  // use filter function if value matches
+		  filterValue = filterFns[ filterValue ] || filterValue;
+		  $('.grid').isotope({ filter: filterValue });
+		});
 	});
 };
 
@@ -168,7 +185,7 @@ mainKnits.init = function() {
 		//call the function to make the ajax call
 		mainKnits.getKnits(userLocation);
 	});
-	$('button').on('click', function() {
+	$('.geolocation button').on('click', function() {
 		mainKnits.geoLocate();
 	});
 };

@@ -1,4 +1,5 @@
 @import '_setup';
+@import '_global';
 @import '_custom-range';
 
 body{
@@ -46,13 +47,6 @@ main h2{
 	text-align: center;
 }
 
-main form{
-	max-width: 600px;
-	// background-color: grey;
-	margin: 0 auto;
-	text-align: center;
-}
-
 .geolocation {
 	text-align: center;
 	padding: 20px 0;
@@ -74,10 +68,27 @@ main button{
 
 section.results{
 	width: 100%;
-	// display: none;
+	display: none;
 }
 
 .price-range {
+	text-align: center;
+	label {
+		display: block;
+		padding-bottom: 20px;
+	}
+	p {
+		display: inline-block;
+	}
+	.price-label {
+		padding: 20px 0;
+	}
+}
+
+main form{
+	max-width: 600px;
+	// background-color: grey;
+	margin: 0 auto;
 	text-align: center;
 }
 
@@ -128,8 +139,6 @@ section.results{
 	position: absolute;
 	z-index: 1;
 }
-
-
 
 .pricetag img{
 	transform: rotate(270deg);
