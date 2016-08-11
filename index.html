@@ -30,10 +30,15 @@
 		<h2>Enter Your Location</h2>
 		<!--enter your location-->
 		<form action="" class="user-location-form">
-			<input type="text" class="user-location">
+			<input type="text" name="user-location" class="user-location">
 			<input type="submit">
 		</form>
-		<button><h3>Or use your location</h3></button>
+		<div class="geolocation">
+			<button><h3>Or use your location</h3></button>
+		</div>
+		<div class="loading-container">
+			<img src="assets/ripple.svg" class="loading" alt="a ripple animation denoting that the page is loading">
+		</div>
 
 		<section class="results">
 			<div class="wrapper">
