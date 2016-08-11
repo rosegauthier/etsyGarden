@@ -5,6 +5,11 @@ mainKnits.apiKey = 'c7jmtzsyy9arcehfyeq3mk58';
 mainKnits.apiurl = 'https://openapi.etsy.com/v2/listings/active';
 mainKnits.geocodeurl = 'http://nominatim.openstreetmap.org/reverse';
 
+
+mainKnits.outputUpdate = function(price) {
+	$('#max-price').val(`$${price}`);
+};
+
 //sorting function for reordering the results based on relevance
 mainKnits.favorersSort = function(a,b) {
 	if (a.num_favorers < b.num_favorers) {
@@ -140,7 +145,6 @@ mainKnits.getKnits = function(location) {
 		  	// columnWidth: colW,
 		    	isFitWidth: true
 			}
-
 		});
 	});
 };

@@ -36,7 +36,24 @@
 
 		<section class="results">
 			<div class="wrapper">
-				<input type="range" name="zoomLevel" min="1" max="150" step="11">
+				<div class="price-range">
+					<input type="range" name="zoomLevel" class="price-sort" id="price-sort" min="0" max="1000" step="10" oninput="mainKnits.outputUpdate(value)" list="price-markers">
+					<datalist id="price-markers">
+						<option>100</option>
+						<option>200</option>
+						<option>300</option>
+						<option>400</option>
+						<option>500</option>
+						<option>600</option>
+						<option>700</option>
+						<option>800</option>
+						<option>900</option>
+					</datalist>
+					<div class="price-label">
+						<label for="price-sort">Max Price:</label>
+						<output for="price-sort" id="max-price">No limit</output>
+					</div>
+				</div> <!-- .price-range -->
 				<div class="etsyGallery grid wrapper" id="etsyResults"></div>
 			</div>
 
