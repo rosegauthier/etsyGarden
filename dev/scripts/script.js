@@ -110,8 +110,7 @@ mainKnits.init = function() {
 		mainKnits.getKnits(userLocation);
 	});
 	$('button').on('click', function() {
-
-	mainKnits.geoLocate();
+		mainKnits.geoLocate();
 	});
 };
 
