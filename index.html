@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Fine Knits</title>
+	<link rel="stylesheet" href="dev/styles/animate.css">
 	<link rel="stylesheet" href="public/styles/style.css">
 
 <!-- 	NOUN PROJECT CREDITS -->
@@ -29,20 +30,22 @@
 	<main>
 		<h2>Enter Your Location</h2>
 		<!--enter your location-->
-		<form action="" class="user-location-form">
-			<input type="text" name="user-location" class="user-location">
-			<input type="submit">
-		</form>
-		<div class="geolocation">
-			<button><h3>Or use your location</h3></button>
+		<div class="user-location-container">
+			<form action="" class="user-location-form">
+				<input type="text" name="user-location" class="user-location">
+				<input type="submit">
+			</form>
+			<div class="geolocation">
+				<button><h3>Use your location</h3></button>
+			</div>
 		</div>
 		<div class="loading-container">
-			<img src="assets/ripple.svg" class="loading" alt="a ripple animation denoting that the page is loading">
+			<img src="assets/red_knitting.svg" class="loading animated bounce infinite" alt="a ripple animation denoting that the page is loading">
 		</div>
 
 		<section class="results">
 			<div class="wrapper">
-				<div class="price-range">
+				<!-- <div class="price-range">
 					<input type="range" name="zoomLevel" class="price-sort" id="price-sort" min="0" max="1000" step="10" oninput="mainKnits.outputUpdate(value)" list="price-markers">
 					<datalist id="price-markers">
 						<option>100</option>
@@ -59,7 +62,7 @@
 						<label for="price-sort">Max Price:</label>
 						<output for="price-sort" id="max-price">No limit</output>
 					</div>
-				</div> <!-- .price-range -->
+				</div> --> <!-- .price-range -->
 				<div class="etsyGallery grid wrapper" id="etsyResults"></div>
 			</div>
 			
