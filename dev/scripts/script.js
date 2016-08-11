@@ -5,7 +5,7 @@ mainKnits.apiKey = 'c7jmtzsyy9arcehfyeq3mk58';
 mainKnits.apiurl = 'https://openapi.etsy.com/v2/listings/active';
 mainKnits.geocodeurl = 'http://nominatim.openstreetmap.org/reverse';
 
-
+//sorting function for reordering the results based on relevance
 mainKnits.favorersSort = function(a,b) {
 	if (a.num_favorers < b.num_favorers) {
 		return 1;
@@ -21,9 +21,13 @@ mainKnits.favorersSort = function(a,b) {
 mainKnits.geoLocate = function() {
 	if('geolocation' in navigator){
 	   // geolocation is supported :)
-	   navigator.geolocation.getCurrentPosition(success, options); 
+	   navigator.geolocation.getCurrentPosition(success, error, options);
+	   //once the button has been pressed, hide the button and make the loading animation visible
+	   $('button').hide(); 
+	   $('.loading').show();
 	}else{
 	   // no geolocation :(
+	   $('.loading-container').append(`<p>Sorry, we couldn't find your location. Please manually enter your location.</p>`);
 	}
 	var options = {
 	// enableHighAccuracy = should the device take extra time or power to return a really accurate result, or should it give you the quick (but less accurate) answer?  
@@ -37,12 +41,11 @@ mainKnits.geoLocate = function() {
 	// get longitude and latitude from the position object passed in
 	   var lat = pos.coords.latitude;
 	   var lon = pos.coords.longitude;
-	// and presto, we have the device's location! Let's just alert it for now... 
-	   console.log(lat,lon);
+	   //call the function to trigger the ajax call that converts the coordinates into City,State
 	   mainKnits.convertLocation(lat, lon);
 	};
 	function error(err){
-	   alert('Can not find your location. Please manually enter your city.'); // alert the error message
+	   $('.loading-container').append(`<p>Sorry, we couldn't find your location. Please manually enter your location.</p>`);
 	};
 }
 
@@ -57,13 +60,11 @@ mainKnits.convertLocation = function(lat, lon) {
 			format: 'json'
 		}
 	}).then(function(city) {
-		// console.log(city.address.city);
-		// console.log(city.address.state);
+		//concatonate the converted info into one string and pass it along to the etsy API function
 		var cityState = city.address.city + "," + city.address.state;
 		mainKnits.getKnits(cityState);
 	});
 };
-
 
 mainKnits.getKnits = function(location) {
 	$.ajax({
@@ -83,20 +84,13 @@ mainKnits.getKnits = function(location) {
 			}
 		}
 	}).then(function(etsy) {
-	
+		//once the API data is back, hide the loading animation
+		$('.loading').hide();
+		//make the container for the slider and the images visible
+		$('.results').show();
+
 		var results = etsy.results;
 
-		// var removePatterns = results.tags.filter(function(){
-		// 	/([pattern])\w+/g
-		// });
-
-		results.forEach(function(item, index){
-			var removePatterns = item.tags.filter(function(){
-				return item !== /([pattern])\w+/g
-			});
-		});
-
-		//We need to be able to sort the results before we print them on the page
 		//We need to be able to sort the results by relevance before we print them on the page
 		results.sort(mainKnits.favorersSort);
 
@@ -155,7 +149,11 @@ mainKnits.init = function() {
 	$('.user-location-form').on('submit', function(e) {
 		e.preventDefault();
 		var userLocation = $('.user-location').val();
-		
+		//show the loading animation on submit of the form
+		$('.loading').show();
+		//clear the input field
+		$('input[name=user-location]').val('');
+		//call the function to make the ajax call
 		mainKnits.getKnits(userLocation);
 	});
 	$('button').on('click', function() {
