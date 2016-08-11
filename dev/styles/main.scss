@@ -2,6 +2,7 @@
 
 body{
 	font-family: 'Lato', sans-serif;
+	background-color: #cac3c0;
 }
 
 .wrapper{
@@ -16,6 +17,10 @@ header{
 	background-size: cover;
 	position: relative;
 
+}
+
+h1{
+	font-size: 18px;
 }
 
 .headerContent{
@@ -87,11 +92,13 @@ section.results input{
 .productItem{
 	display: block;
 	width: 255px;
-	height: 201px;
+	height: 203px;
 	margin: 10px;
 	font-size: 0;
 	position: relative;
 	// justify-content: center;
+	border: 1px solid #a6a09d;
+	border-radius: 0px 0px 0px 0px;
 
 }
 
@@ -134,7 +141,7 @@ section.results input{
 	// -webkit-box-shadow: 4px 4px 12px -5px rgba(0,0,0,0.75);
 	// -moz-box-shadow: 4px 4px 12px -5px rgba(0,0,0,0.75);
 	// box-shadow: 4px 4px 12px -5px rgba(0,0,0,0.75);
-	opacity: 0.7;
+	opacity: 0.85;
 }
 
 .productItem img{
