@@ -40,17 +40,28 @@ main form{
 	text-align: center;
 }
 
+.geolocation {
+	text-align: center;
+	padding: 20px 0;
+}
+
 main button{
 	display: inline-block;
 	width: 300px;
 	margin: 0 auto;
+}
+
+.loading-container {
+	height: 100px;
 	text-align: center;
-	margin-left: calc(50% - 150px);
-	margin-top: 20px;
+	.loading{
+		display: none;
+	}	
 }
 
 section.results{
 	width: 100%;
+	display: none;
 }
 
 section.results input{
