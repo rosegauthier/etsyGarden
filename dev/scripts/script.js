@@ -57,7 +57,10 @@ mainKnits.convertLocation = function(lat, lon) {
 			format: 'json'
 		}
 	}).then(function(city) {
-		console.log(city);
+		// console.log(city.address.city);
+		// console.log(city.address.state);
+		var cityState = city.address.city + "," + city.address.state;
+		mainKnits.getKnits(cityState);
 	});
 };
 
