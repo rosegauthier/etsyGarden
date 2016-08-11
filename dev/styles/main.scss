@@ -1,4 +1,5 @@
 @import '_setup';
+@import '_global';
 @import '_custom-range';
 @import '_var';
 
@@ -18,7 +19,6 @@ header{
 	background-image: url('https://hd.unsplash.com/photo-1444594975920-e69885b357d5');
 	background-size: cover;
 	position: relative;
-
 }
 
 h1{
@@ -92,7 +92,6 @@ main h2{
 		}
 }
 
-
 .loading-container {
 	height: 100px;
 	text-align: center;
@@ -109,10 +108,27 @@ main h2{
 
 section.results{
 	width: 100%;
-	// display: none;
+	display: none;
 }
 
 .price-range {
+	text-align: center;
+	label {
+		display: block;
+		padding-bottom: 20px;
+	}
+	p {
+		display: inline-block;
+	}
+	.price-label {
+		padding: 20px 0;
+	}
+}
+
+main form{
+	max-width: 600px;
+	// background-color: grey;
+	margin: 0 auto;
 	text-align: center;
 }
 
@@ -166,8 +182,6 @@ section.results{
 	position: absolute;
 	z-index: 1;
 }
-
-
 
 .pricetag img{
 	transform: rotate(270deg);
