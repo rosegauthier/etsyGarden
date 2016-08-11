@@ -1,4 +1,5 @@
-@import '_setup.scss';
+@import '_setup';
+@import '_custom-range';
 
 body{
 	font-family: 'Lato', sans-serif;
@@ -73,11 +74,11 @@ main button{
 
 section.results{
 	width: 100%;
-	display: none;
+	// display: none;
 }
 
-section.results input{
-	width: 100%;
+.price-range {
+	text-align: center;
 }
 
 .etsyGallery{
@@ -96,10 +97,8 @@ section.results input{
 	margin: 10px;
 	font-size: 0;
 	position: relative;
-	// justify-content: center;
 	border: 1px solid #a6a09d;
 	border-radius: 0px 0px 0px 0px;
-
 }
 
 .pricetag{
