@@ -22,21 +22,24 @@ header{
 }
 
 h1{
-	font-size: 18px;
+	font-size: 54px;
 }
 
 .headerContent{
 	position: absolute;
 	top: 50%;
-	left: 30%;
+	left: calc(50% - 280px);
 	color: #ab453c;
 	font-family: 'Playfair Display', serif;
 	font-style: italic;
 	font-weight: bold;
 }
 
-.headerContent svg{
+.leaf{
 	width: 70px;
+	position: absolute;
+	left: calc(50% - 35px);
+	bottom: 80px;
 }
 
 main{
@@ -110,6 +113,9 @@ main form{
 	position: relative;
 	border: 1px solid #a6a09d;
 	border-radius: 0px 0px 0px 0px;
+	-webkit-box-shadow: 3px 3px 12px -5px rgba(0,0,0,0.75);
+	-moz-box-shadow: 3px 3px 12px -5px rgba(0,0,0,0.75);
+	box-shadow: 3px 3px 12px -5px rgba(0,0,0,0.75);
 }
 
 .pricetag{
