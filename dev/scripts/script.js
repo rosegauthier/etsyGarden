@@ -72,6 +72,7 @@ mainKnits.getKnits = function(location) {
 		}
 	})
 	.then(function(etsy) {
+		console.log(etsy);
 		//once the API data is back, hide the loading animation
 		$('.loading').hide();
 		//make the container for the slider and the images visible
@@ -186,29 +187,28 @@ mainKnits.smoothScroll = function(section) {
 };
 
 mainKnits.init = function() {
+	$('a.down-arrow').smoothScroll({
+		offset: -100,
+		speed: 800,
+	});
 
 	$('.user-location-form').on('submit', function(e) {
 		e.preventDefault();
 		var userLocation = $('.user-location').val();
 		//show the loading animation on submit of the form
 		$('.loading').show();
-		//clear the input field
-		$('input[name=user-location]').val('');
+		console.log(userLocation);
 		//call the function to make the ajax call
 		mainKnits.getKnits(userLocation);
+		//clear the input field
+		$('input[name=user-location]').val('');
 	});
 	$('.geolocation').on('click', function() {
 		mainKnits.geoLocate();
 	});
-
 };
 
 //document ready
 $(function() {
 	mainKnits.init();
-
-	$('a.down-arrow').smoothScroll({
-		offset: -100,
-		speed: 800,
-	});
 });
