@@ -189,6 +189,7 @@ mainKnits.smoothScroll = function(section) {
 };
 
 mainKnits.init = function() {
+
 	$('.user-location-form').on('submit', function(e) {
 		e.preventDefault();
 		var userLocation = $('.user-location').val();
@@ -202,11 +203,15 @@ mainKnits.init = function() {
 	$('.geolocation').on('click', function() {
 		mainKnits.geoLocate();
 	});
+
 };
 
 //document ready
 $(function() {
 	mainKnits.init();
 
-	$('a.down-arrow').smoothScroll();
+	$('a.down-arrow').smoothScroll({
+		offset: -100,
+		speed: 800,
+	});
 });
