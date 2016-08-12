@@ -133,7 +133,7 @@ mainKnits.displayResults = function(filteredResults) {
 		var title = item.title;
 
 		$('.grid').append(
-			`<a href="${productUrl}" class="grid-item productItem">
+			`<a href="${productUrl}" class="grid-item productItem" target="_blank">
 
 				<div class="pricetag">
 					<img src="assets/pricetag.svg" alt="price tag">
@@ -141,12 +141,8 @@ mainKnits.displayResults = function(filteredResults) {
 						<p class="dollars number" >${price}</p>
 						<p class="currency">${currency}</p>
 					</div>
-					
 				</div>
-
-					<img class="productImage" src=${previewImage} alt="${title}">
-				<img src=${previewImage} alt="${title}">
-
+				<img class="productImage" src=${previewImage} alt="${title}">
 			</a>`);
 	});
 
