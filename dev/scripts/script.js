@@ -5,26 +5,6 @@ mainKnits.apiKey = 'c7jmtzsyy9arcehfyeq3mk58';
 mainKnits.apiurl = 'https://openapi.etsy.com/v2/listings/active';
 mainKnits.geocodeurl = 'http://nominatim.openstreetmap.org/reverse';
 
-mainKnits.userPrice = 0;
-
-mainKnits.outputUpdate = function(price) {
-	mainKnits.userPrice = price;
-	$('#max-price').val(`$${price}`);
-};
-
-//sorting function for reordering the results based on relevance
-mainKnits.favorersSort = function(a,b) {
-	if (a.num_favorers < b.num_favorers) {
-		return 1;
-	}
-	else if (a.num_favorers > b.num_favorers) {
-		return -1;
-	}
-	else {
-		return 0;
-	}
-};
-
 mainKnits.geoLocate = function() {
 	if('geolocation' in navigator){
 	   // geolocation is supported :)
@@ -32,7 +12,7 @@ mainKnits.geoLocate = function() {
 	   //once the button has been pressed, hide the button and make the loading animation visible
 	   $('.geolocation').hide(); 
 	   $('.loading').show();
-	}else{
+	} else {
 	   // no geolocation :(
 	   $('.loading-container').append(`<p>Sorry, we couldn't find your location. Please manually enter your location.</p>`);
 	}
@@ -98,83 +78,115 @@ mainKnits.getKnits = function(location) {
 		$('.results').show();
 
 		var results = etsy.results;
-
 		//We need to be able to sort the results by relevance before we print them on the page
 		results.sort(mainKnits.favorersSort);
+		//call the function to loop through each item in the results array and remove the patterns
+		mainKnits.removePatterns(results);
+		//call the function to append the results to the page
+		mainKnits.displayResults(mainKnits.filteredResults);		
+		//call the function to scroll the page to the top of the gallery
+		mainKnits.smoothScroll('.results');
+	});
+};
 
-		//Provide empty array for below operations
-		var filteredResults = [];
-		//loop through each item in the results array
-		results.forEach(function(result,index) {
-			//assume each item is not a pattern
-			var isPattern = false;
-			//For each result, loop through each string in the tags array
-			result.tags.forEach(function(tag,index) {
-				//use regex to match any "pattern" in the string
-				var pattern = /(pattern)+/g;
-				if (pattern.exec(tag)) {
-					//if the word "pattern" appears in the string, mark this result as a pattern
-					isPattern = true;
-				}
-			});
-			//for each result, check if it is a pattern. If it is not a pattern, push it onto the empty array we created
-			if (isPattern === false) {
-				filteredResults.push(result);
+//sorting function for reordering the results based on relevance
+mainKnits.favorersSort = function(a,b) {
+	if (a.num_favorers < b.num_favorers) {
+		return 1;
+	}
+	else if (a.num_favorers > b.num_favorers) {
+		return -1;
+	}
+	else {
+		return 0;
+	}
+};
+
+mainKnits.removePatterns = function(results) {
+	//Provide empty array for below operations
+	mainKnits.filteredResults = [];
+	results.forEach(function(result,index) {
+		//assume each item is not a pattern
+		var isPattern = false;
+		//For each result, loop through each string in the tags array
+		result.tags.forEach(function(tag,index) {
+			//use regex to match any "pattern" in the string
+			var pattern = /(pattern)+/g;
+			if (pattern.exec(tag)) {
+				//if the word "pattern" appears in the string, mark this result as a pattern
+				isPattern = true;
 			}
 		});
-		console.log(etsy);
+		//for each result, check if it is a pattern. If it is not a pattern, push it onto the empty array we created
+		if (isPattern === false) {
+			mainKnits.filteredResults.push(result);
+		}
+	});
+};
 
-		
-		filteredResults.forEach(function(item, index) {
-			var previewImage = item.Images[0].url_170x135;
-			var productUrl = item.url;
-			var price = item.price;
-			var currency = item.currency_code;
-			var title = item.title;
+mainKnits.displayResults = function(filteredResults) {
+	filteredResults.forEach(function(item, index) {
+		var previewImage = item.Images[0].url_170x135;
+		var productUrl = item.url;
+		var price = item.price;
+		var currency = item.currency_code;
+		var title = item.title;
 
-			$('.grid').append(
-				`<a href="${productUrl}" class="grid-item productItem">
+		$('.grid').append(
+			`<a href="${productUrl}" class="grid-item productItem">
 
-					<div class="pricetag">
-						<img src="assets/pricetag.svg" alt="price tag">
-						<div class="pricebox">
-							<p class="dollars number" >${price}</p>
-							<p class="currency">${currency}</p>
-						</div>
-						
+				<div class="pricetag">
+					<img src="assets/pricetag.svg" alt="price tag">
+					<div class="pricebox">
+						<p class="dollars number" >${price}</p>
+						<p class="currency">${currency}</p>
 					</div>
+					
+				</div>
 
 					<img class="productImage" src=${previewImage} alt="${title}">
+				<img src=${previewImage} alt="${title}">
 
-				</a>`);
-		});
-
-		var $grid = $('.grid').isotope({
-	 		 // options
-			itemSelector: '.grid-item',
-		 	// resizable: false,
-		 	masonry: {
-		  	// columnWidth: colW,
-		    	isFitWidth: true
-			}
-		});
-		//Use isotope to filter selections based on price
-		// hash of functions that match data-filter values
-		var filterFns = {
-		  // show if number is greater than 50
-		  maxPrice: function() {
-		    var number = $(this).find('.number').text();
-		    return parseInt( number, 10 ) < mainKnits.userPrice;
-		  },
-		};
-		// filter items on button click
-		$('.price-sort').on( 'change', function() {
-		  var filterValue = $(this).attr('data-filter');
-		  // use filter function if value matches
-		  filterValue = filterFns[ filterValue ] || filterValue;
-		  $grid.isotope({ filter: filterValue });
-		});
+			</a>`);
 	});
+
+	var $grid = $('.grid').isotope({
+ 		 // options
+		itemSelector: '.grid-item',
+	 	// resizable: false,
+	 	masonry: {
+	  	// columnWidth: colW,
+	    	isFitWidth: true
+		}
+	});
+	//Use isotope to filter selections based on price
+	// hash of functions that match data-filter values
+	var filterFns = {
+	  // show if number is greater than 50
+	  maxPrice: function() {
+	    var number = $(this).find('.number').text();
+	    return parseInt( number, 10 ) < mainKnits.userPrice;
+	  },
+	};
+	// filter items on button click
+	$('.price-sort').on('change', function() {
+	  var filterValue = $(this).attr('data-filter');
+	  // use filter function if value matches
+	  filterValue = filterFns[ filterValue ] || filterValue;
+	  $grid.isotope({ filter: filterValue });
+	});
+};
+
+mainKnits.outputUpdate = function(price) {
+	mainKnits.userPrice = price;
+	$('#max-price').val(`$${price}`);
+};
+
+mainKnits.smoothScroll = function(section) {
+	$('body').animate({
+	    // Grab the offset (position relative to document)
+	    scrollTop: $(section).offset().top
+	  }, 'slow');
 };
 
 mainKnits.init = function() {
