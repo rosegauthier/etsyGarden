@@ -144,7 +144,7 @@ mainKnits.getKnits = function(location) {
 						
 					</div>
 
-					<img src=${previewImage} alt="${title}">
+					<img class="productImage" src=${previewImage} alt="${title}">
 
 				</a>`);
 		});
