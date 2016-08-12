@@ -208,4 +208,6 @@ mainKnits.init = function() {
 //document ready
 $(function() {
 	mainKnits.init();
+
+	$('a.down-arrow').smoothScroll();
 });
