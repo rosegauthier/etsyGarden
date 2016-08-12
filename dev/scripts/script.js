@@ -4,6 +4,7 @@ var mainKnits = {}
 mainKnits.apiKey = 'c7jmtzsyy9arcehfyeq3mk58';
 mainKnits.apiurl = 'https://openapi.etsy.com/v2/listings/active';
 mainKnits.geocodeurl = 'http://nominatim.openstreetmap.org/reverse';
+mainKnits.submitted = false;
 
 mainKnits.geoLocate = function() {
 	if('geolocation' in navigator){
@@ -124,7 +125,14 @@ mainKnits.removePatterns = function(results) {
 	});
 };
 
+
 mainKnits.displayResults = function(filteredResults) {
+	
+
+	if (mainKnits.submitted === true) {
+		$('.grid').empty();
+	}
+
 	filteredResults.forEach(function(item, index) {
 		var previewImage = item.Images[0].url_170x135;
 		var productUrl = item.url;
@@ -146,15 +154,28 @@ mainKnits.displayResults = function(filteredResults) {
 			</a>`);
 	});
 
-	var $grid = $('.grid').isotope({
- 		 // options
-		itemSelector: '.grid-item',
-	 	// resizable: false,
-	 	masonry: {
-	  	// columnWidth: colW,
-	    	isFitWidth: true
-		}
-	});
+	if (mainKnits.submitted === true) {
+		
+		var $grid = $('.grid').isotope('reloadItems');
+		$grid.isotope();
+		// setTimeout(function() {
+		// 	$('.grid').isotope('reloadItems');
+		// 	$('.grid').isotope();
+		// }, 1000);
+	} else {
+		var $grid = $('.grid').isotope({
+	 		 // options
+			itemSelector: '.grid-item',
+		 	// resizable: false,
+		 	masonry: {
+		  	// columnWidth: colW,
+		    	isFitWidth: true
+			}
+		});
+	}
+	mainKnits.submitted = true;
+
+
 	//Use isotope to filter selections based on price
 	// hash of functions that match data-filter values
 	var filterFns = {
