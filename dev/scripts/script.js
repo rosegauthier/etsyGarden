@@ -159,10 +159,6 @@ mainKnits.displayResults = function(filteredResults) {
 		
 		var $grid = $('.grid').isotope('reloadItems');
 		$grid.isotope();
-		// setTimeout(function() {
-		// 	$('.grid').isotope('reloadItems');
-		// 	$('.grid').isotope();
-		// }, 1000);
 	} else {
 		var $grid = $('.grid').isotope({
 	 		 // options
