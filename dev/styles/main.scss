@@ -145,7 +145,7 @@ main{
 
 section.results{
 	width: 100%;
-	display: none;
+	// display: none;
 	.price-range {
 		text-align: center;
 		label {
@@ -158,6 +158,10 @@ section.results{
 		.price-label {
 			padding: 20px 0;
 		}
+	}
+	.more-results {
+		width: 200px;
+		height: 40px;
 	}
 }
 
