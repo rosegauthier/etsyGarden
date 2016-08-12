@@ -144,6 +144,7 @@ mainKnits.displayResults = function(filteredResults) {
 					
 				</div>
 
+					<img class="productImage" src=${previewImage} alt="${title}">
 				<img src=${previewImage} alt="${title}">
 
 			</a>`);
