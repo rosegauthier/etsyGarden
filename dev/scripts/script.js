@@ -78,7 +78,9 @@ mainKnits.getKnits = function(location) {
 		$('.loading').hide();
 		//make the container for the slider and the images visible
 		$('.results').show();
-
+		//re-enable the text input and submit buttons
+		$('.user-location').removeAttr('disabled');
+		$('input[type="submit"]').removeAttr('disabled');
 		var results = etsy.results;
 		//We need to be able to sort the results by relevance before we print them on the page
 		results.sort(mainKnits.favorersSort);
@@ -159,10 +161,6 @@ mainKnits.displayResults = function(filteredResults) {
 		
 		var $grid = $('.grid').isotope('reloadItems');
 		$grid.isotope();
-		// setTimeout(function() {
-		// 	$('.grid').isotope('reloadItems');
-		// 	$('.grid').isotope();
-		// }, 1000);
 	} else {
 		var $grid = $('.grid').isotope({
 	 		 // options
@@ -210,12 +208,14 @@ mainKnits.smoothScroll = function(section) {
 mainKnits.init = function() {
 	$('a.down-arrow').smoothScroll({
 		offset: -100,
-		speed: 800,
+		speed: 800
 	});
 
 	$('.user-location-form').on('submit', function(e) {
 		e.preventDefault();
 		var userLocation = $('.user-location').val();
+		$('.user-location').attr('disabled', 'disabled');
+		$('input[type="submit"]').attr('disabled', 'disabled');
 		//show the loading animation on submit of the form
 		$('.loading').show();
 		console.log(userLocation);

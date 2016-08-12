@@ -73,9 +73,15 @@ main{
 	align-items: center;
 	margin: 50px 0 0 0;
 	form.user-location-form {
+		display: inline-block;
 		text-align: center;
 		font-size: 0;
-		text-align: center;
+		.location-label {
+			display: block;
+			padding-bottom: 6px;
+			text-align: left;
+			font-size: 16px;
+		}
 		input[type="text"] {
 			border: none;
 			height: 40px;
@@ -89,21 +95,30 @@ main{
 			height: 40px;
 			padding: 10px;
 			font-size: 18px;
-			margin: 0 10px 0 0;
 			// width: 10%;
 		}
 	}
+	span.or {
+		display: inline-block;
+		height: 0;
+		margin: 0 10px;
+		vertical-align: middle;
+		font-family: $heading-font;
+		font-size: 16px;
+		font-style: bold;
+		text-transform: uppercase;
+	}
 	.geolocation {
+		display: inline-block;
 		text-align: center;
 		// padding: 20px 0;
 		button{
 			display: inline-block;
 			width: 300px;
-			margin: 0 auto;
+			margin: 25px auto 0 auto;
 			border: none;
 			background-color: $brand-color-strong;
 			height: 40px;
-			margin: 0 0 0 10px;
 			h3 {
 				color: white;
 				margin: 0;
