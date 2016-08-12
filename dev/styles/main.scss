@@ -17,6 +17,8 @@ header{
 	width: 100%;
 	height: 100vh;
 	background-image: url('https://hd.unsplash.com/photo-1444594975920-e69885b357d5');
+	// background-image: url('../../assets/knitting250px/knitting250px.png');
+	// background-repeat: repeat;
 	background-size: cover;
 	position: relative;
 	background-attachment : fixed;
@@ -39,6 +41,7 @@ header{
 		p {
 			text-align: center;
 			color: white;
+			font-family: $primary-font;
 		}
 		i {
 			font-size: 45px;
@@ -113,13 +116,13 @@ main{
 .loading-container {
 	height: 100px;
 	text-align: center;
-	margin: 20px 0;
+	margin: 80px 0;
 	.loading{
 		display: none;
 	}
 	img {
-		width: 80px;
-		height: 80px;
+		width: 140px;
+		height: 140px;
 		position: relative;
 		top: 12px;
 	}
