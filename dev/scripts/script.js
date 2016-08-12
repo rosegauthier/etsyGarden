@@ -65,7 +65,7 @@ mainKnits.getKnits = function(location) {
 				materials: 'knit',
 				category: 'knit',
 				location: location,
-				limit: 10,
+				limit: 100,
 				listing_id: 'images',
 				includes: 'Images'
 			}
@@ -204,4 +204,6 @@ mainKnits.init = function() {
 //document ready
 $(function() {
 	mainKnits.init();
+
+	$('a.down-arrow').smoothScroll();
 });
