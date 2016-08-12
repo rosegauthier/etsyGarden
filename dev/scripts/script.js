@@ -142,7 +142,7 @@ mainKnits.displayResults = function(filteredResults) {
 						<p class="currency">${currency}</p>
 					</div>
 				</div>
-				<img src=${previewImage} alt="${title}">
+				<img class="productImage" src=${previewImage} alt="${title}">
 			</a>`);
 	});
 
