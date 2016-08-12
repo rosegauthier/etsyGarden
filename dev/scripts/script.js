@@ -93,6 +93,36 @@ mainKnits.getKnits = function(location) {
 	});
 };
 
+mainKnits.getMore = function(location) {
+	$.ajax({
+		url: 'http://proxy.hackeryou.com',
+		method: 'GET',
+		dataType: 'json',
+		data: {
+			reqUrl: mainKnits.apiurl,
+			params: {
+				api_key: mainKnits.apiKey,
+				materials: 'knit',
+				category: 'knit',
+				location: location,
+				// max_price: price,
+				limit: 100,
+				offset: 100,
+				listing_id: 'images',
+				includes: 'Images'
+			}
+		}
+	}).then(function(moreEtsy) {
+		console.log(moreEtsy);
+		var results = moreEtsy.results;
+		results.sort(mainKnits.favorersSort);
+
+		mainKnits.removePatterns(results);
+
+		mainKnits.displayResults(mainKnits.filteredResults)
+	});
+};
+
 //sorting function for reordering the results based on relevance
 mainKnits.favorersSort = function(a,b) {
 	if (a.num_favorers < b.num_favorers) {
@@ -132,9 +162,9 @@ mainKnits.removePatterns = function(results) {
 mainKnits.displayResults = function(filteredResults) {
 	
 
-	if (mainKnits.submitted === true) {
-		$('.grid').empty();
-	}
+	// if (mainKnits.submitted === true) {
+	// 	$('.grid').empty();
+	// }
 
 	filteredResults.forEach(function(item, index) {
 		var previewImage = item.Images[0].url_170x135;
@@ -142,19 +172,35 @@ mainKnits.displayResults = function(filteredResults) {
 		var price = item.price;
 		var currency = item.currency_code;
 		var title = item.title;
+		if (mainKnits.submitted === true) {
+			var newItem = $(`<a href="${productUrl}" class="grid-item productItem" target="_blank">
 
-		$('.grid').append(
-			`<a href="${productUrl}" class="grid-item productItem" target="_blank">
-
-				<div class="pricetag">
-					<img src="assets/pricetag.svg" alt="price tag">
-					<div class="pricebox">
-						<p class="dollars number" >${price}</p>
-						<p class="currency">${currency}</p>
+					<div class="pricetag">
+						<img src="assets/pricetag.svg" alt="price tag">
+						<div class="pricebox">
+							<p class="dollars number" >${price}</p>
+							<p class="currency">${currency}</p>
+						</div>
 					</div>
-				</div>
-				<img class="productImage" src=${previewImage} alt="${title}">
-			</a>`);
+					<img class="productImage" src=${previewImage} alt="${title}">
+				</a>`);
+			$('.grid').append(newItem).isotope( 'appended', newItem );
+		}
+		else {
+			$('.grid').append(
+				`<a href="${productUrl}" class="grid-item productItem" target="_blank">
+
+					<div class="pricetag">
+						<img src="assets/pricetag.svg" alt="price tag">
+						<div class="pricebox">
+							<p class="dollars number" >${price}</p>
+							<p class="currency">${currency}</p>
+						</div>
+					</div>
+					<img class="productImage" src=${previewImage} alt="${title}">
+				</a>`);
+			
+		}
 	});
 
 	if (mainKnits.submitted === true) {
@@ -196,6 +242,7 @@ mainKnits.displayResults = function(filteredResults) {
 mainKnits.outputUpdate = function(price) {
 	mainKnits.userPrice = price;
 	$('#max-price').val(`$${price}`);
+	$('.more-results').text(`View More Results Under $${price}`);
 };
 
 mainKnits.smoothScroll = function(section) {
@@ -213,19 +260,24 @@ mainKnits.init = function() {
 
 	$('.user-location-form').on('submit', function(e) {
 		e.preventDefault();
-		var userLocation = $('.user-location').val();
+		mainKnits.userLocation = $('.user-location').val();
 		$('.user-location').attr('disabled', 'disabled');
 		$('input[type="submit"]').attr('disabled', 'disabled');
 		//show the loading animation on submit of the form
 		$('.loading').show();
-		console.log(userLocation);
+		console.log(mainKnits.userLocation);
 		//call the function to make the ajax call
-		mainKnits.getKnits(userLocation);
+		mainKnits.getKnits(mainKnits.userLocation);
 		//clear the input field
 		$('input[name=user-location]').val('');
 	});
+
 	$('.geolocation').on('click', function() {
 		mainKnits.geoLocate();
+	});
+
+	$('.more-results').on('click', function() {
+		mainKnits.getMore(mainKnits.userLocation);
 	});
 };
 
