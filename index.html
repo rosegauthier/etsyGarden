@@ -22,19 +22,21 @@
 			<img class="leaf" src="assets/leaf.svg" alt="leaf">
 			<h1>Fall in Love With Knits</h1>
 			<p>Let's do some shopping</p>
-			<a href="#user-location" class="down-arrow"><i class="fa fa-angle-down animated pulse infinite" aria-hidden="true"></i></a>
+			<a href="#location" class="down-arrow"><i class="fa fa-angle-down animated pulse infinite" aria-hidden="true"></i></a>
 		</section>
 	</header>
 
 	<main>
 		<!--enter your location-->
-		<section class="location">
-			<h2>Enter Your Location</h2>
+		<section class="location" id="location">
+			<h2>Help us Find You</h2>
 			<div class="user-location-container">
 				<form action="" class="user-location-form">
+					<label for="user-location" class="location-label">Enter Your Location</label>
 					<input type="text" name="user-location" class="user-location">
 					<input type="submit">
 				</form>
+				<span class="or">Or</span>
 				<div class="geolocation">
 					<button><h3>Use your location</h3></button>
 				</div>
