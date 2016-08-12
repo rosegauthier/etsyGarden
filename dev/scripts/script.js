@@ -5,8 +5,10 @@ mainKnits.apiKey = 'c7jmtzsyy9arcehfyeq3mk58';
 mainKnits.apiurl = 'https://openapi.etsy.com/v2/listings/active';
 mainKnits.geocodeurl = 'http://nominatim.openstreetmap.org/reverse';
 
+mainKnits.userPrice = 0;
 
 mainKnits.outputUpdate = function(price) {
+	mainKnits.userPrice = price;
 	$('#max-price').val(`$${price}`);
 };
 
@@ -28,7 +30,7 @@ mainKnits.geoLocate = function() {
 	   // geolocation is supported :)
 	   navigator.geolocation.getCurrentPosition(success, error, options);
 	   //once the button has been pressed, hide the button and make the loading animation visible
-	   $('button').hide(); 
+	   $('.geolocation').hide(); 
 	   $('.loading').show();
 	}else{
 	   // no geolocation :(
@@ -88,7 +90,8 @@ mainKnits.getKnits = function(location) {
 				includes: 'Images'
 			}
 		}
-	}).then(function(etsy) {
+	})
+	.then(function(etsy) {
 		//once the API data is back, hide the loading animation
 		$('.loading').hide();
 		//make the container for the slider and the images visible
@@ -145,7 +148,8 @@ mainKnits.getKnits = function(location) {
 
 				</a>`);
 		});
-		$('.grid').isotope({
+
+		var $grid = $('.grid').isotope({
 	 		 // options
 			itemSelector: '.grid-item',
 		 	// resizable: false,
@@ -154,22 +158,21 @@ mainKnits.getKnits = function(location) {
 		    	isFitWidth: true
 			}
 		});
-		var userPrice = mainKnits.outputUpdate();
-		console.log(userPrice);
+		//Use isotope to filter selections based on price
 		// hash of functions that match data-filter values
 		var filterFns = {
 		  // show if number is greater than 50
 		  maxPrice: function() {
 		    var number = $(this).find('.number').text();
-		    return parseInt( number, 10 ) < userPrice;
+		    return parseInt( number, 10 ) < mainKnits.userPrice;
 		  },
 		};
 		// filter items on button click
-		$('.price-sort').on( 'input change', function() {
+		$('.price-sort').on( 'change', function() {
 		  var filterValue = $(this).attr('data-filter');
 		  // use filter function if value matches
 		  filterValue = filterFns[ filterValue ] || filterValue;
-		  $('.grid').isotope({ filter: filterValue });
+		  $grid.isotope({ filter: filterValue });
 		});
 	});
 };
@@ -185,7 +188,7 @@ mainKnits.init = function() {
 		//call the function to make the ajax call
 		mainKnits.getKnits(userLocation);
 	});
-	$('.geolocation button').on('click', function() {
+	$('.geolocation').on('click', function() {
 		mainKnits.geoLocate();
 	});
 };
@@ -193,4 +196,6 @@ mainKnits.init = function() {
 //document ready
 $(function() {
 	mainKnits.init();
+
+	$('a.down-arrow').smoothScroll();
 });
