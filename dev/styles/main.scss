@@ -10,6 +10,14 @@ body{
 	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
+		.overlay {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-color: rgba(0,0,0,0.3);
+		}
 }
 
 .wrapper{
@@ -23,14 +31,6 @@ header{
 	height: 100vh;
 	// background-image: url('../../assets/knitting250px/knitting250px.png');
 	// background-repeat: repeat;
-	.overlay {
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background-color: rgba(0,0,0,0.3);
-	}
 	.headerContent{
 		position: absolute;
 		top: calc(50% - 178px);
@@ -90,6 +90,7 @@ main{
 	    text-transform: uppercase;
 	    color: #645D5A;
 	    align-self: center;
+	    letter-spacing: 1px;
 	}
 	form.user-location-form {
 		display: inline-block;
@@ -100,6 +101,7 @@ main{
 			padding-bottom: 6px;
 			text-align: left;
 			font-size: 16px;
+			color: #645D5A;
 		}
 		input[type="text"] {
 			border: none;
@@ -114,11 +116,13 @@ main{
 			height: 40px;
 			padding: 10px;
 			font-size: 18px;
+			text-shadow: 1px 1px 1px black;
 			// width: 10%;
 		}
 	}
 	span.or {
 		display: inline-block;
+		color: #645D5A;
 		// height: 0;
 		margin: 0 10px;
 		vertical-align: middle;
@@ -142,6 +146,7 @@ main{
 				color: white;
 				margin: 0;
 				font-size: 18px;
+				text-shadow: 1px 1px 1px black;
 			}
 		}
 	}

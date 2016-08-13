@@ -257,7 +257,7 @@ mainKnits.smoothScroll = function(section) {
 
 mainKnits.init = function() {
 	$('a.down-arrow').smoothScroll({
-		offset: -100,
+		// offset: -100,
 		speed: 800
 	});
 
