@@ -164,6 +164,7 @@ main{
 section.results{
 	display: none;
 	width: 100%;
+	padding-bottom: 27px;
 	background-color: $brand-color-neutral;
 	.price-range {
 		text-align: center;
@@ -269,4 +270,16 @@ section.results{
 
 a:focus{
 	outline: none;
+}
+
+button.more-results{
+	background-color: #ab453c;
+	color: white;
+	border: none;
+	margin: 0 auto;
+	display: inherit;
+	text-align: center;
+	margin-top: 20px;
+
+
 }
