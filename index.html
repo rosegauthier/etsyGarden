@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Fine Knits</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://use.fontawesome.com/8aedef41c0.js"></script>
 	<link href='https://fonts.googleapis.com/css?family=Lato|Playfair+Display:700italic,400italic' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="dev/styles/animate.css">
@@ -23,7 +24,7 @@
 				<h1>Fall in Love With Knits</h1>
 				<img class="leaf" src="assets/leaf.svg" alt="leaf">
 				<p>Let's do some shopping</p>
-				<a href="#location" class="down-arrow"><i class="fa fa-angle-down animated pulse infinite" aria-hidden="true"></i></a>
+				<a href="#location" class="down-arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></a>
 			</section>
 		</div>
 	</header>
@@ -63,29 +64,15 @@
 				</div> <!-- .price-range -->
 				<div class="grid wrapper" id="etsyResults"></div>
 			</div>
-			<button class="more-results">View More Results</button>
+			<div class="wrapper end-message">
+				<button class="more-results">View More Results</button>
+				<a href="#location" class="backToTop">back to top <i class="fa fa-angle-up" aria-hidden="true"></i></a>
+			</div>
 		</section>
 	</main>
-
-			<section class="results">
-				<div class="wrapper">
-					<div class="price-range">
-						<label for="price-sort">Filter results by price</label>
-						<input type="range" name="zoomLevel" class="price-sort" id="price-sort" min="0" max="500" value="500" step="10" oninput="mainKnits.outputUpdate(value)" data-filter="maxPrice">
-						<div class="price-label">
-							<p>Max Price:</p>
-							<output for="price-sort" id="max-price">$500</output>
-						</div>
-					</div> <!-- .price-range -->
-					<div class="grid wrapper" id="etsyResults"></div>
-				</div>
-				<button class="more-results">View More Results</button>
-				<div class="wrapper">
-					<a href="#location" class="backToTop">back to top <i class="fa fa-angle-up" aria-hidden="true"></i></a>
-				</div>
-			</section>
-		</main>
-	</div>
+	<footer class="main-footer">
+		<p>Developed by <a href="http://www.roselgauthier.com">Rose Gauthier</a>, <a href="http://www.gregamckenzie.com">Greg McKenzie</a> &amp; <a href="http://www.jaymierosen.com">Jaymie Rosen</a></p>
+	</footer>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
 
