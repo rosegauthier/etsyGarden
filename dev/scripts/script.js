@@ -260,6 +260,10 @@ mainKnits.init = function() {
 		speed: 800
 	});
 
+	$('a.backToTop').smoothScroll({
+		speed: 800
+	});
+
 	$('.user-location-form').on('submit', function(e) {
 		e.preventDefault();
 		mainKnits.userLocation = $('.user-location').val();
