@@ -177,6 +177,7 @@ section.results{
 		label {
 			display: block;
 			padding-bottom: 20px;
+			padding-top: 20px;
 		}
 		p {
 			display: inline-block;
@@ -275,4 +276,13 @@ button.more-results{
 	display: inherit;
 	text-align: center;
 	margin-top: 20px;
+}
+
+.backToTop{
+	text-align: right;
+	text-decoration: none;
+	color: #ab453c;
+	position: absolute;
+	right: 31px;
+    bottom: 39px;
 }
