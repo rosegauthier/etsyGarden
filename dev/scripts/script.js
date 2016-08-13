@@ -6,6 +6,7 @@ mainKnits.apiurl = 'https://openapi.etsy.com/v2/listings/active';
 mainKnits.geocodeurl = 'http://nominatim.openstreetmap.org/reverse';
 mainKnits.submitted = false;
 mainKnits.moreResults = false;
+mainKnits.offset = 100;
 
 mainKnits.geoLocate = function() {
 	if('geolocation' in navigator){
@@ -94,7 +95,7 @@ mainKnits.getKnits = function(location) {
 	});
 };
 
-mainKnits.getMore = function(location) {
+mainKnits.getMore = function(location, offset) {
 	$.ajax({
 		url: 'http://proxy.hackeryou.com',
 		method: 'GET',
@@ -108,13 +109,16 @@ mainKnits.getMore = function(location) {
 				location: location,
 				// max_price: price,
 				limit: 100,
-				offset: 100,
+				offset: mainKnits.offset,
 				listing_id: 'images',
 				includes: 'Images'
 			}
 		}
 	}).then(function(moreEtsy) {
+		mainKnits.offset += 100;
+
 		console.log(moreEtsy);
+
 		var results = moreEtsy.results;
 		results.sort(mainKnits.favorersSort);
 
@@ -123,6 +127,11 @@ mainKnits.getMore = function(location) {
 		mainKnits.moreResults = true;
 
 		mainKnits.displayResults(mainKnits.filteredResults)
+		if (results.length < 100) {
+			$('button.more-results').hide();
+			$('.end-message').prepend('<h3 class="no-more-results">No more results in your area</h3>');
+			console.log('not enough results');
+		}
 	});
 };
 
@@ -245,7 +254,7 @@ mainKnits.displayResults = function(filteredResults) {
 mainKnits.outputUpdate = function(price) {
 	mainKnits.userPrice = price;
 	$('#max-price').val(`$${price}`);
-	$('.more-results').text(`View More Results Under $${price}`);
+	$('.more-results').text(`View More Under $${price}`);
 };
 
 mainKnits.smoothScroll = function(section) {
@@ -283,7 +292,7 @@ mainKnits.init = function() {
 	});
 
 	$('.more-results').on('click', function() {
-		mainKnits.getMore(mainKnits.userLocation);
+		mainKnits.getMore(mainKnits.userLocation, mainKnits.offset);
 	});
 };
 

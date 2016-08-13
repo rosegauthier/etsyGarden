@@ -2,6 +2,9 @@ input[type=range] {
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
   width: 500px; /* Specific width is required for Firefox. */
   background: transparent; /* Otherwise white in Chrome */
+      @media all and (max-width: 550px) {
+          width: 280px;
+      }
 }
 
 input[type=range]:focus {
