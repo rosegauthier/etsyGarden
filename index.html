@@ -17,20 +17,20 @@
 	<!-- <text x="0" y="115" fill="#000000" font-size="5px" font-weight="bold" font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif">Created by Peter Silk</text><text x="0" y="120" fill="#000000" font-size="5px" font-weight="bold" font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif">from the Noun Project</text -->
 </head>
 <body>
-	<div class="overlay">
-		<header>
-				<section class="headerContent">		
-					<h1>Fall in Love With Knits</h1>
-					<img class="leaf" src="assets/leaf.svg" alt="leaf">
-					<p>Let's do some shopping</p>
-					<a href="#location" class="down-arrow"><i class="fa fa-angle-down animated pulse infinite" aria-hidden="true"></i></a>
-				</section>
-			
-		</header>
-
-		<main>
-			<!--enter your location-->
-			<section class="location" >
+	<header>
+		<div class="overlay">
+			<section class="headerContent">		
+				<h1>Fall in Love With Knits</h1>
+				<img class="leaf" src="assets/leaf.svg" alt="leaf">
+				<p>Let's do some shopping</p>
+				<a href="#location" class="down-arrow"><i class="fa fa-angle-down animated pulse infinite" aria-hidden="true"></i></a>
+			</section>
+		</div> <!-- .overlay -->
+	</header>
+	<main>
+		<!--enter your location-->
+		<section class="location" id="location">
+			<div class="overlay">
 				<div class="user-location-container">
 					<h2>Help us Find You</h2>
 					<form action="" class="user-location-form">
@@ -44,34 +44,30 @@
 					</div>
 				</div>
 
-				<div class="loading-container" id="location">
+				<div class="loading-container">
 					<img src="assets/red_knitting.svg" class="loading animated bounce infinite" alt="a ripple animation denoting that the page is loading">
 				</div>
-			</section>
-
-			<section class="results">
-				<div class="wrapper">
-					<div class="price-range">
-						<label for="price-sort">Filter results by price</label>
-						<input type="range" name="zoomLevel" class="price-sort" id="price-sort" min="0" max="500" value="500" step="10" oninput="mainKnits.outputUpdate(value)" data-filter="maxPrice">
-						<div class="price-label">
-							<p>Max Price:</p>
-							<output for="price-sort" id="max-price">$500</output>
-						</div>
-					</div> <!-- .price-range -->
-					<div class="grid wrapper" id="etsyResults"></div>
-				</div>
-				<button class="more-results">View More Results</button>
-			</section>
-		</main>
-	</div>
+			</div> <!-- .overlay -->
+		</section>
+		<section class="results">
+			<div class="wrapper">
+				<div class="price-range">
+					<label for="price-sort">Filter results by price</label>
+					<input type="range" name="zoomLevel" class="price-sort" id="price-sort" min="0" max="500" value="500" step="10" oninput="mainKnits.outputUpdate(value)" data-filter="maxPrice">
+					<div class="price-label">
+						<p>Max Price:</p>
+						<output for="price-sort" id="max-price">$500</output>
+					</div>
+				</div> <!-- .price-range -->
+				<div class="grid wrapper" id="etsyResults"></div>
+			</div>
+			<button class="more-results">View More Results</button>
+		</section>
+	</main>
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
-
 	<script src="https://npmcdn.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
-
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-smooth-scroll/1.7.2/jquery.smooth-scroll.min.js"></script>
-
 	<script src="dev/scripts/script.js"></script>
 
 </body>
