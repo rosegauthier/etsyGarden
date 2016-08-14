@@ -116,6 +116,8 @@ mainKnits.getMore = function(location, offset) {
 			}
 		}
 	}).then(function(moreEtsy) {
+		$('.more-results-loading').css('opacity', '0');
+
 		mainKnits.offset += 100;
 
 		console.log(moreEtsy);
@@ -294,6 +296,7 @@ mainKnits.init = function() {
 	});
 
 	$('.more-results').on('click', function() {
+		$('.more-results-loading').css('opacity', '1');
 		mainKnits.getMore(mainKnits.userLocation, mainKnits.offset);
 	});
 };
