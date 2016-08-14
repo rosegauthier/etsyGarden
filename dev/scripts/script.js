@@ -14,6 +14,7 @@ mainKnits.geoLocate = function() {
 	   navigator.geolocation.getCurrentPosition(success, error, options);
 	   //once the button has been pressed, hide the button and make the loading animation visible
 	   $('.geolocation').hide(); 
+	   $('.or').hide();
 	   $('.loading').show();
 	} else {
 	   // no geolocation :(
@@ -157,10 +158,11 @@ mainKnits.removePatterns = function(results) {
 		//For each result, loop through each string in the tags array
 		result.tags.forEach(function(tag,index) {
 			//use regex to match any "pattern" in the string
-			var pattern = /(pattern)+/g;
+			var pattern = /(pattern)+/ig;
 			if (pattern.exec(tag)) {
 				//if the word "pattern" appears in the string, mark this result as a pattern
 				isPattern = true;
+				console.log(result);
 			}
 		});
 		//for each result, check if it is a pattern. If it is not a pattern, push it onto the empty array we created
